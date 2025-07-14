@@ -33,41 +33,47 @@ const FeaturedProducts = () => {
   ];
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-800 py-16">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl">
-        <div className="text-center mb-12">
-          <h2 className="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl dark:text-white">
+    <section className="bg-gray-50 dark:bg-gray-800 py-8 sm:py-12 md:py-16 lg:py-20">
+      <div className="py-4 px-4 mx-auto max-w-screen-xl sm:py-6 md:py-8">
+        {/* 標題區域 - 改善響應式 */}
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+          <h2 className="mb-3 text-2xl font-extrabold tracking-tight leading-tight text-gray-900 sm:text-3xl md:text-4xl lg:text-5xl dark:text-white sm:mb-4 md:mb-6">
             特色商品
           </h2>
-          <p className="text-lg font-normal text-gray-500 dark:text-gray-400">
+          <p className="text-base font-normal text-gray-500 sm:text-lg md:text-xl dark:text-gray-400">
             精選優質商品，為您帶來最佳購物體驗
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 商品網格 - 增強響應式布局 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {products.map((product) => (
-            <div key={product.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300">
+            <div key={product.id} className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              {/* 商品圖片區域 */}
               <div className="relative">
                 <img 
-                  className="rounded-t-lg w-full h-64 object-cover" 
+                  className="rounded-t-lg w-full h-48 sm:h-56 md:h-64 lg:h-56 xl:h-64 object-cover" 
                   src={product.image} 
                   alt={product.name} 
                 />
-                <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded sm:text-sm">
                   {product.badge}
                 </span>
               </div>
-              <div className="p-5">
-                <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              
+              {/* 商品資訊區域 */}
+              <div className="p-4 sm:p-5 md:p-6">
+                <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 sm:text-xl dark:text-white">
                   {product.name}
                 </h5>
                 
+                {/* 評分區域 - 改善響應式 */}
                 <div className="flex items-center mb-3">
                   <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
                       <svg
                         key={i}
-                        className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'text-yellow-300' : 'text-gray-300'} mr-1`}
+                        className={`w-3 h-3 sm:w-4 sm:h-4 ${i < Math.floor(product.rating) ? 'text-yellow-300' : 'text-gray-300'} mr-1`}
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -76,26 +82,28 @@ const FeaturedProducts = () => {
                         <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                       </svg>
                     ))}
-                    <span className="ml-1 text-sm text-gray-500">({product.rating})</span>
+                    <span className="ml-1 text-xs sm:text-sm text-gray-500">({product.rating})</span>
                   </div>
                 </div>
 
+                {/* 價格區域 - 改善響應式 */}
                 <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <div className="flex flex-col sm:flex-row sm:items-center">
+                    <span className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                       {product.price}
                     </span>
-                    <span className="text-sm text-gray-500 line-through ml-2">
+                    <span className="text-sm text-gray-500 line-through sm:ml-2">
                       {product.originalPrice}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex space-x-2">
+                {/* 按鈕區域 - 改善響應式布局 */}
+                <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
                   <Button 
                     variant="primary" 
                     size="sm" 
-                    className="flex-1"
+                    className="flex-1 text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
                     onClick={() => console.log(`加入購物車: ${product.name}`)}
                   >
                     加入購物車
@@ -103,6 +111,7 @@ const FeaturedProducts = () => {
                   <Button 
                     variant="outline" 
                     size="sm"
+                    className="flex-1 sm:flex-none text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
                     onClick={() => console.log(`查看詳情: ${product.name}`)}
                   >
                     詳情
@@ -113,10 +122,12 @@ const FeaturedProducts = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        {/* 查看更多按鈕 - 改善響應式 */}
+        <div className="text-center mt-8 sm:mt-10 md:mt-12 lg:mt-16">
           <Button 
             variant="secondary" 
             size="lg"
+            className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
             onClick={() => console.log('查看所有商品')}
           >
             查看所有商品
